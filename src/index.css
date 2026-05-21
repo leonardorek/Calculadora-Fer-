@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Montserrat", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --color-brand-gold: #C2A374;
+  --color-brand-beige: #FDFCF9;
+  --color-brand-earth: #BDAE94;
+  --color-brand-dark: #000000;
+  --color-brand-gray: #222222;
+}
+
+@layer base {
+  body {
+    @apply font-sans bg-brand-dark text-white antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans;
+  }
+}
+
+.glass-card {
+  @apply bg-white/5 backdrop-blur-lg border border-white/10;
+}
+
+.gold-gradient {
+  background: linear-gradient(135deg, #C5A059 0%, #E2C78E 50%, #C5A059 100%);
+}
+
+.gold-text {
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(135deg, #C5A059 0%, #E2C78E 50%, #C5A059 100%);
+}

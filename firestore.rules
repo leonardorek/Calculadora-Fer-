@@ -1,0 +1,60 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 0. Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper Primitives
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    // Lead Validation
+    function isValidLead(data) {
+      return data.keys().hasAll(['name', 'clinicName', 'email', 'whatsapp', 'revenue', 'createdAt'])
+        && data.keys().size() <= 10
+        && data.name is string && data.name.size() > 0 && data.name.size() <= 200
+        && data.clinicName is string && data.clinicName.size() > 0 && data.clinicName.size() <= 200
+        && data.email is string && data.email.matches('^[^@]+@[^@]+\\.[^@]+$')
+        && data.whatsapp is string && data.whatsapp.size() <= 50
+        && data.revenue is number && data.revenue >= 0
+        && data.createdAt == request.time
+        && (data.get('specialty', '') is string && data.get('specialty', '').size() <= 100)
+        && (data.get('monthlyEconomy', 0) is number)
+        && (data.get('annualEconomy', 0) is number)
+        && (data.get('recovery', 0) is number);
+    }
+
+    // 1. Leads Collection
+    match /leads/{leadId} {
+      // Public can create leads with strict validation
+      allow create: if isValidId(leadId) && isValidLead(incoming());
+      
+      // Only admins can read/list leads
+      allow get, list, delete: if isAdmin();
+      
+      // Updates are not allowed for leads once submitted to maintain integrity
+      allow update: if false;
+    }
+
+    // 2. Admins Collection
+    match /admins/{userId} {
+      allow read: if isSignedIn() && request.auth.uid == userId;
+      allow write: if false; // Managed via console for security
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "entities": {
+    "Lead": {
+      "title": "Lead",
+      "description": "Dados coletados da calculadora de equiparação hospitalar.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Nome do titular responsável" },
+        "clinicName": { "type": "string", "description": "Nome da clínica ou instituição" },
+        "email": { "type": "string", "description": "E-mail de contato", "format": "email" },
+        "whatsapp": { "type": "string", "description": "WhatsApp de contato" },
+        "revenue": { "type": "number", "description": "Faturamento mensal informado" },
+        "specialty": { "type": "string", "description": "Especialidade da clínica" },
+        "monthlyEconomy": { "type": "number", "description": "Economia mensal estimada" },
+        "annualEconomy": { "type": "number", "description": "Economia anual estimada" },
+        "recovery": { "type": "number", "description": "Potencial de recuperação (5 anos)" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Data de criação do lead" }
+      },
+      "required": ["name", "clinicName", "email", "whatsapp", "revenue", "createdAt"]
+    }
+  },
+  "firestore": {
+    "leads/{leadId}": {
+      "schema": "Lead",
+      "description": "Coleção de leads capturados pela calculadora."
+    }
+  }
+}
