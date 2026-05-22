@@ -135,13 +135,13 @@ export default function App() {
       setStep('processing');
       let p = 0;
       const interval = setInterval(() => {
-        p += 5;
+        p += 2;
         setProgress(p);
         if (p >= 100) {
           clearInterval(interval);
-          setTimeout(() => setStep('result'), 600);
+          setTimeout(() => setStep('result'), 500);
         }
-      }, 55);
+      }, 50);
     }
   };
 
@@ -294,7 +294,7 @@ export default function App() {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand-gold/25 bg-brand-gold/[0.04]">
               <ShieldCheck size={11} className="text-brand-gold" />
               <span className="text-[8px] font-bold tracking-[0.3em] uppercase text-brand-gold font-sans">
-                Inteligência Fiscal de Alta Performance
+                Calcule agora sua economia
               </span>
             </div>
 
@@ -329,7 +329,7 @@ export default function App() {
                 </div>
 
                 {/* Elegant, clear Call to Action to fill the simulator */}
-                <div className="mb-6 bg-brand-gold/15 border-2 border-brand-gold/70 p-4 rounded-md text-center relative overflow-hidden shadow-[0_0_20px_rgba(194,163,116,0.15)]">
+                <div className={`mb-6 bg-brand-gold/15 border-2 border-brand-gold/70 p-4 rounded-md text-center relative overflow-hidden shadow-[0_0_20px_rgba(194,163,116,0.15)] ${step === 1 ? 'block' : 'hidden md:block'}`}>
                   <div className="absolute inset-0 bg-gradient-to-r from-brand-gold/5 via-transparent to-brand-gold/5 pointer-events-none" />
                   <p className="text-white text-xs md:text-sm font-sans font-extrabold tracking-wider uppercase flex items-center justify-center gap-2">
                     <Calculator size={16} className="text-brand-gold animate-pulse animate-duration-1000" />
@@ -396,7 +396,7 @@ export default function App() {
                                   className={`p-5 text-left border transition-all flex justify-between items-center group font-sans ${formData.taxRegime === opt ? 'border-brand-gold bg-brand-gold/10 text-brand-gold' : 'border-white/5 bg-white/[0.01] hover:border-white/20 hover:bg-white/[0.04] text-white/70'}`}
                                 >
                                   <span className="font-bold text-sm tracking-tight">{opt}</span>
-                                  <ChevronRight size={15} className="opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                                  <ChevronRight className="w-6 h-6 md:w-4 md:h-4 opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
                                 </button>
                               ))}
                             </div>
@@ -435,8 +435,8 @@ export default function App() {
                                     className={`p-5 text-left border transition-all flex justify-between items-center font-sans ${active ? 'border-brand-gold bg-brand-gold/10 text-brand-gold' : 'border-white/5 bg-white/[0.01] hover:border-white/20 hover:bg-white/[0.03] text-white/70'}`}
                                   >
                                     <span className="font-bold text-xs md:text-sm tracking-tight leading-relaxed max-w-[85%]">{opt.label}</span>
-                                    <div className={`w-5 h-5 rounded border flex flex-shrink-0 items-center justify-center transition-all ${active ? 'bg-brand-gold border-brand-gold text-black' : 'border-white/20'}`}>
-                                      {active && <CheckCircle2 size={14} strokeWidth={4} />}
+                                    <div className={`w-7 h-7 md:w-5 md:h-5 rounded border flex flex-shrink-0 items-center justify-center transition-all ${active ? 'bg-brand-gold border-brand-gold text-black' : 'border-white/20'}`}>
+                                      {active && <CheckCircle2 className="w-5 h-5 md:w-3.5 md:h-3.5" strokeWidth={4} />}
                                     </div>
                                   </button>
                                 );
@@ -499,7 +499,7 @@ export default function App() {
                                   className={`p-5 text-left border transition-all flex justify-between items-center group font-sans ${formData.professionals === opt ? 'border-brand-gold bg-brand-gold/10 text-brand-gold' : 'border-white/5 bg-white/[0.01] hover:border-white/20 hover:bg-white/[0.03] text-white/70'}`}
                                 >
                                   <span className="font-bold text-sm tracking-tight">{opt}</span>
-                                  <ChevronRight size={15} className="opacity-40 group-hover:opacity-100 transition-all" />
+                                  <ChevronRight className="w-6 h-6 md:w-4 md:h-4 opacity-40 group-hover:opacity-100 transition-all" />
                                 </button>
                               ))}
                             </div>
@@ -610,20 +610,20 @@ export default function App() {
                             {/* CTAs */}
                             <div className="pt-2 flex flex-col md:flex-row gap-3">
                               <button 
+                                onClick={handleDirectWhatsAppRedirect}
+                                className="order-1 md:order-2 flex-[2] py-5 bg-[#009a60] text-white hover:bg-[#008250] hover:translate-y-[-2px] hover:scale-[1.02] active:scale-95 transition-all duration-300 text-xs md:text-sm font-black tracking-widest uppercase rounded-md flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(0,154,96,0.45)] hover:shadow-[0_0_40px_rgba(0,154,96,0.7)] ring-2 ring-emerald-500/20 hover:ring-emerald-400/40 cursor-pointer"
+                              >
+                                GARANTIR DIAGNÓSTICO OFICIAL COMPLETO <ArrowRight size={14} />
+                              </button>
+                              <button 
                                 onClick={() => {
                                   setStep(1);
                                   setRawInput('');
                                   setFormData(INITIAL_DATA);
                                 }}
-                                className="flex-1 py-5 border border-white/10 text-white/50 hover:text-white hover:border-white/20 transition-all text-[10px] font-black tracking-widest uppercase rounded-sm"
+                                className="order-2 md:order-1 flex-1 py-5 border border-white/10 text-white/50 hover:text-white hover:border-white/20 transition-all text-[10px] font-black tracking-widest uppercase rounded-sm"
                               >
-                                Recorrigir Dados
-                              </button>
-                              <button 
-                                onClick={handleDirectWhatsAppRedirect}
-                                className="flex-[2] py-5 bg-[#009a60] text-white hover:bg-[#008250] hover:translate-y-[-2px] hover:scale-[1.02] active:scale-95 transition-all duration-300 text-xs md:text-sm font-black tracking-widest uppercase rounded-md flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(0,154,96,0.45)] hover:shadow-[0_0_40px_rgba(0,154,96,0.7)] ring-2 ring-emerald-500/20 hover:ring-emerald-400/40 cursor-pointer"
-                              >
-                                GARANTIR DIAGNÓSTICO OFICIAL COMPLETO <ArrowRight size={14} />
+                                Calcule novamente
                               </button>
                             </div>
                           </motion.div>
@@ -637,13 +637,13 @@ export default function App() {
                       <div className="mt-8 pt-6 border-t border-white/[0.08] flex flex-col md:flex-row justify-between items-center gap-4">
                         <button 
                           onClick={prevStep}
-                          className="w-full md:w-auto py-4.5 px-8 bg-[#1a1815] border-2 border-brand-gold/60 hover:border-brand-gold text-brand-gold hover:text-white font-sans font-extrabold text-xs md:text-sm tracking-widest uppercase flex items-center justify-center gap-2 rounded-md transition-all duration-300 pointer-events-auto cursor-pointer shadow-[0_2px_15px_rgba(194,163,116,0.1)] hover:shadow-[0_2px_25px_rgba(194,163,116,0.25)]"
+                          className="w-full md:w-auto py-2 md:py-4.5 px-4 md:px-8 bg-transparent md:bg-[#1a1815] border-0 md:border-2 border-transparent md:border-brand-gold/60 hover:text-white/50 md:hover:border-brand-gold text-white/30 md:text-brand-gold md:hover:text-white font-sans font-extrabold text-[10px] md:text-sm tracking-widest uppercase flex items-center justify-center gap-1 md:gap-2 rounded-md transition-all duration-300 pointer-events-auto cursor-pointer shadow-none md:shadow-[0_2px_15px_rgba(194,163,116,0.1)] order-3 md:order-1"
                         >
-                          <ChevronLeft size={18} />
+                          <ChevronLeft className="w-4 h-4 md:w-[18px] md:h-[18px]" />
                           Voltar
                         </button>
                         
-                        <div className="flex gap-2.5 py-2">
+                        <div className="flex gap-2.5 py-2 order-2 md:order-2">
                           {[1, 2, 3, 4, 5].map((idx) => (
                             <div 
                                 key={idx}
@@ -655,7 +655,7 @@ export default function App() {
                         <button 
                           onClick={nextStep}
                           disabled={step === 1 && !formData.revenue}
-                          className={`w-full md:w-auto py-4.5 px-12 font-sans font-black text-xs md:text-sm tracking-widest uppercase flex items-center justify-center gap-2 rounded-md transition-all duration-300 cursor-pointer ${
+                          className={`w-full md:w-auto py-4.5 px-12 font-sans font-black text-xs md:text-sm tracking-widest uppercase flex items-center justify-center gap-2 rounded-md transition-all duration-300 cursor-pointer order-1 md:order-3 ${
                             step === 1 && !formData.revenue 
                               ? 'bg-white/5 border border-white/10 text-white/20 cursor-not-allowed shadow-none' 
                               : 'gold-gradient text-black font-extrabold hover:brightness-125 hover:scale-[1.05] active:scale-95 shadow-[0_0_30px_rgba(197,160,89,0.45)] hover:shadow-[0_0_45px_rgba(197,160,89,0.7)] ring-2 ring-white/15'
@@ -696,15 +696,16 @@ export default function App() {
               </div>
 
               {/* Sophisticated Video Player Card */}
-              <div className="relative group rounded overflow-hidden aspect-[16/10] bg-brand-gray border border-white/5 shadow-inner">
+              <div className="relative group rounded overflow-hidden aspect-[4/3] bg-brand-gray border border-white/5 shadow-inner">
                 {/* Real video tag playing an ambient cinematic loop or customizable link */}
                 <video 
                   ref={videoRef}
-                  src="https://melosacilottoadv.com.br/wp-content/uploads/2026/05/Video-do-WhatsApp-de-2025-03-17-as-11.44.27_297fc4aa.mp4"
+                  src="https://melosacilottoadv.com.br/wp-content/uploads/2026/05/Video-do-WhatsApp-de-2025-03-17-as-11.44.27_297fc4aa.mp4#t=0.001"
                   loop
                   muted={isMuted}
                   className={`w-full h-full object-cover transition-all duration-300 ${isPlaying ? "brightness-100" : "grayscale brightness-[0.4] group-hover:brightness-[0.5]"}`}
                   playsInline
+                  preload="auto"
                 />
 
                 {/* Nice Static Golden Overlaid Title and Play button */}
