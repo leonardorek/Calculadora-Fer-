@@ -217,7 +217,7 @@ export default function App() {
 
     const encodedMessage = encodeURIComponent(message);
     // Phone number configured according to the professional's firm
-    const whatsappUrl = `https://wa.me/5511999995555?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/5519996865610?text=${encodedMessage}`;
     
     window.open(whatsappUrl, '_blank');
     window.location.href = whatsappUrl;
@@ -318,12 +318,28 @@ export default function App() {
               
               {/* --- Custom-Built Step-by-Step Interactive Calculator Container with premium obsidian gold theme and ambient glow shadow --- */}
               <div className="glass-card h-full rounded-lg border-2 border-brand-gold/60 bg-[#060607]/95 overflow-hidden flex flex-col p-6 md:p-10 relative shadow-[0_0_60px_rgba(194,163,116,0.25)] transition-all duration-300 md:min-h-[550px] lg:min-h-[610px] justify-between">
+                
+                {/* Visual watermark of Dra. Fernanda's brand - Elegant, extremely subtle, does not conflict with reading the calculator options */}
+                <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-[0.03] overflow-hidden select-none z-0">
+                  <img 
+                    src="https://melosacilottoadv.com.br/wp-content/uploads/2025/03/3.2-madeira.png" 
+                    alt="Melo Sacilotto Advocacia Watermark" 
+                    className="w-[85%] max-w-[420px] object-contain select-none"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
               
-              <div>
-                {/* Header Controls */}
-                <div className="flex justify-between items-center mb-5 pb-3.5 border-b border-white/[0.04]">
-                  <div className="text-[10px] tracking-[0.2em] uppercase text-white/50 font-bold flex items-center gap-2 font-sans">
-                    <Calculator size={13} className="text-brand-gold" />
+              <div className="relative z-10">
+                {/* Header Controls with Small Centered Logo */}
+                <div className="flex flex-col items-center mb-5 pb-3.5 border-b border-white/[0.04] gap-2.5">
+                  <img 
+                    src="https://melosacilottoadv.com.br/wp-content/uploads/2025/03/3.2-madeira.png" 
+                    alt="Melo Sacilotto Advocacia Logo" 
+                    className="h-7 md:h-8 w-auto object-contain select-none"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="text-[10px] tracking-[0.2em] uppercase text-white/50 font-bold flex items-center gap-2.5 font-sans">
+                    <Calculator size={18} className="text-brand-gold" />
                     <span>Simulador Estratégico</span>
                   </div>
                 </div>
@@ -331,14 +347,14 @@ export default function App() {
                 {/* Elegant, clear Call to Action to fill the simulator */}
                 <div className={`mb-6 bg-brand-gold/15 border-2 border-brand-gold/70 p-4 rounded-md text-center relative overflow-hidden shadow-[0_0_20px_rgba(194,163,116,0.15)] ${step === 1 ? 'block' : 'hidden md:block'}`}>
                   <div className="absolute inset-0 bg-gradient-to-r from-brand-gold/5 via-transparent to-brand-gold/5 pointer-events-none" />
-                  <p className="text-white text-xs md:text-sm font-sans font-extrabold tracking-wider uppercase flex items-center justify-center gap-2">
-                    <Calculator size={16} className="text-brand-gold animate-pulse animate-duration-1000" />
+                  <p className="text-white text-xs md:text-sm font-sans font-extrabold tracking-wider uppercase flex items-center justify-center gap-3">
+                    <Calculator size={24} className="text-brand-gold animate-pulse animate-duration-1000" />
                     <span className="text-brand-gold [text-shadow:_0_1px_10px_rgba(194,163,116,0.3)]">Calcule agora quanto você pode recuperar de impostos</span>
                   </p>
                 </div>
               </div>
 
-              <div className="flex-grow flex flex-col justify-center">
+              <div className="flex-grow flex flex-col justify-center relative z-10">
                 <AnimatePresence mode="wait">
                         
                         {/* --- Step 1: Revenue --- */}
@@ -358,6 +374,8 @@ export default function App() {
                               <span className="text-brand-gold font-sans text-3xl md:text-4xl font-extrabold mr-2 select-none">R$</span>
                               <input 
                                 type="text" 
+                                inputMode="numeric"
+                                pattern="[0-9]*"
                                 autoFocus
                                 value={rawInput ? Number(rawInput).toLocaleString('pt-BR') : ''}
                                 onChange={handleRevenueChange}
@@ -520,7 +538,7 @@ export default function App() {
                                 transition={{ duration: 2.2, repeat: Infinity, ease: "linear" }}
                                 className="w-full h-full border-2 border-brand-gold/10 border-t-brand-gold rounded-full"
                               />
-                              <Calculator className="absolute inset-0 m-auto text-brand-gold" size={32} />
+                              <Calculator className="absolute inset-0 m-auto text-brand-gold" size={44} />
                             </div>
                             
                             <div className="space-y-2">
@@ -634,7 +652,7 @@ export default function App() {
 
                     {/* Step Tracker Indicator */}
                     {typeof step === 'number' && (
-                      <div className="mt-8 pt-6 border-t border-white/[0.08] flex flex-col md:flex-row justify-between items-center gap-4">
+                      <div className="mt-8 pt-6 border-t border-white/[0.08] flex flex-col md:flex-row justify-between items-center gap-4 relative z-10">
                         <button 
                           onClick={prevStep}
                           className="w-full md:w-auto py-2 md:py-4.5 px-4 md:px-8 bg-transparent md:bg-[#1a1815] border-0 md:border-2 border-transparent md:border-brand-gold/60 hover:text-white/50 md:hover:border-brand-gold text-white/30 md:text-brand-gold md:hover:text-white font-sans font-extrabold text-[10px] md:text-sm tracking-widest uppercase flex items-center justify-center gap-1 md:gap-2 rounded-md transition-all duration-300 pointer-events-auto cursor-pointer shadow-none md:shadow-[0_2px_15px_rgba(194,163,116,0.1)] order-3 md:order-1"
@@ -821,7 +839,7 @@ export default function App() {
             <span className="text-[8px] font-bold tracking-[0.2em] text-brand-gold/60 uppercase">Ou se preferir contato direto</span>
           </div>
           <a 
-            href="https://wa.me/5511999995555?text=Ol%C3%A1%20Dra.%20Fernanda%20Melo%20Sacilotto%2C%20estou%20no%20seu%20Portal%20do%20Simulador%20e%20gostaria%20de%20solicitar%20uma%20an%C3%A1lise%20estrat%C3%A9gica%20de%20Equipara%C3%A7%C3%A3o%20Hospitalar%20como%20m%C3%A9dico%20com%20CNPJ."
+            href="https://wa.me/5519996865610?text=Ol%C3%A1%20Dra.%20Fernanda%20Melo%20Sacilotto%2C%20estou%20no%20seu%20Portal%20do%20Simulador%20e%20gostaria%20de%20solicitar%20uma%20an%C3%A1lise%20estrat%C3%A9gica%20de%20Equipara%C3%A7%C3%A3o%20Hospitalar%20como%20m%C3%A9dico%20com%20CNPJ."
             target="_blank"
             rel="noopener noreferrer"
             className="w-full py-4.5 px-6 rounded-md bg-[#009a60] text-white hover:bg-[#008250] hover:translate-y-[-2px] hover:scale-[1.01] active:scale-99 hover:shadow-2xl hover:shadow-[#009a60]/30 font-sans font-extrabold text-xs tracking-[0.2em] uppercase flex items-center justify-center gap-3 transition-all duration-300 shadow-lg shadow-[#009a60]/10 border border-emerald-500/20 ring-2 ring-emerald-500/10 hover:ring-emerald-400/30 cursor-pointer"
