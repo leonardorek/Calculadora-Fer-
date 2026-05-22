@@ -723,7 +723,7 @@ export default function App() {
                   muted={isMuted}
                   className={`w-full h-full object-cover transition-all duration-300 ${isPlaying ? "brightness-100" : "grayscale brightness-[0.4] group-hover:brightness-[0.5]"}`}
                   playsInline
-                  preload="auto"
+                  preload="metadata"
                 />
 
                 {/* Nice Static Golden Overlaid Title and Play button */}
