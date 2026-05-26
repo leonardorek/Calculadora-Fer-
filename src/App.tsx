@@ -307,7 +307,7 @@ export default function App() {
 
             {/* High Converting Subhead detailing benefits exactly matching user screenshot */}
             <p className="text-white/70 text-xs md:text-sm leading-relaxed max-w-xl font-sans font-light">
-              Utilize o benefício fiscal da <strong className="text-white font-bold">Equiparação Hospitalar</strong> e reduza <strong className="text-brand-gold font-bold">70% dos seus impostos</strong> de forma legal e segura.
+              Utilize o benefício fiscal da <strong className="text-white font-bold">Equiparação Hospitalar</strong> e reduza <strong className="text-brand-gold font-bold">em até 70% dos seus impostos</strong> de forma legal e segura.
             </p>
           </div>
 
@@ -349,7 +349,7 @@ export default function App() {
                   <div className="absolute inset-0 bg-gradient-to-r from-brand-gold/5 via-transparent to-brand-gold/5 pointer-events-none" />
                   <p className="text-white text-xs md:text-sm font-sans font-extrabold tracking-wider uppercase flex items-center justify-center gap-3">
                     <Calculator size={24} className="text-brand-gold animate-pulse animate-duration-1000" />
-                    <span className="text-brand-gold [text-shadow:_0_1px_10px_rgba(194,163,116,0.3)]">Calcule agora quanto você pode recuperar de impostos</span>
+                    <span className="text-brand-gold [text-shadow:_0_1px_10px_rgba(194,163,116,0.3)]">Calcule agora quanto você pode economizar de impostos</span>
                   </p>
                 </div>
               </div>
@@ -367,7 +367,7 @@ export default function App() {
                             className="space-y-6"
                           >
                             <div className="text-center space-y-2">
-                              <h3 className="text-2xl md:text-[26px] font-sans font-bold text-white px-4 leading-tight">Qual o seu faturamento médio mensal como médico?</h3>
+                              <h3 className="text-2xl md:text-[26px] font-sans font-bold text-white px-4 leading-tight">Qual o faturamento médio mensal da sua empresa?</h3>
                             </div>
                             
                             <div className="relative pt-4 flex items-center justify-center bg-white/[0.01] border-b border-brand-gold/25 p-4 md:p-6 rounded-sm">
@@ -385,7 +385,7 @@ export default function App() {
                             </div>
                             
                             <p className="text-center text-white/30 text-[9px] tracking-widest uppercase font-bold font-sans">
-                              *Recomendado para receitas operacionais mensais a partir de R$ 50.000
+                              *recomendado para médicos e dentistas cirurgiões
                             </p>
                           </motion.div>
                         )}
@@ -798,10 +798,9 @@ export default function App() {
               </div>
 
               {/* Sub-text Credentials & Pulse Indicators */}
-              <div className="flex justify-between items-center text-[9px] font-bold tracking-widest text-white/40 border-b border-white/[0.04] pb-4">
-                <span>OAB/SP 425.723</span>
-                <div className="flex items-center gap-1.5 text-emerald-400">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" /> Foco em médicos com CNPJ
+              <div className="flex justify-center items-center text-[11px] font-bold tracking-widest text-[#00e676] border-b border-white/[0.04] pb-4">
+                <div className="flex items-center gap-2 text-emerald-400">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" /> Foco em médicos e dentistas cirurgiões
                 </div>
               </div>
 
