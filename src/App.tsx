@@ -22,7 +22,7 @@ import { db, auth } from './lib/firebase';
 
 // --- Types ---
 type ViewMode = 'landing' | 'calculator';
-type CalculatorStep = 1 | 2 | 3 | 4 | 5 | 'processing' | 'result' | 'lead';
+type CalculatorStep = 1 | 2 | 3 | 4 | 'processing' | 'result' | 'lead';
 
 enum OperationType {
   CREATE = 'create',
@@ -129,9 +129,9 @@ export default function App() {
   };
 
   const nextStep = () => {
-    if (typeof step === 'number' && step < 5) {
+    if (typeof step === 'number' && step < 4) {
       setStep((step + 1) as CalculatorStep);
-    } else if (step === 5) {
+    } else if (step === 4) {
       setStep('processing');
       let p = 0;
       const interval = setInterval(() => {
@@ -147,7 +147,7 @@ export default function App() {
 
   const prevStep = () => {
     if (step === 'result') {
-      setStep(5);
+      setStep(4);
     } else if (typeof step === 'number' && step > 1) {
       setStep((step - 1) as CalculatorStep);
     }
@@ -202,17 +202,14 @@ export default function App() {
     }
 
     // 2. Prepare WhatsApp message
-    const message = `Olá Dra. Fernanda Melo Sacilotto, acabei de preencher o Simulador de Equiparação Hospitalar em seu site e gostaria de garantir o meu Diagnóstico Oficial Completo.
+    const message = `Olá! Estou no seu portal do Simulador Tributário e gostaria de solicitar uma análise estratégica de Equiparação Hospitalar para minha empresa na área da saúde.
 
-*Dados do meu Perfil Simulado:*
-- Faturamento mensal informado: ${formData.revenue > 0 ? formatCurrency(formData.revenue) : 'Não informado'}
-- Regime Tributário Atual: ${formData.taxRegime || 'Não informado'}
-- Especialidade Médica: ${formData.specialty || 'Não informada'}
-- Equipe de Apoio / Profissionais: ${formData.professionals || 'Não informado'}
-
-*Economia de Alta Performance Estimada:*
-- Economia mensal: ${formatCurrency(economy.monthly)}
-- Redução anual: ${formatCurrency(economy.annual)}
+*Meus Dados Simulados:*
+- Faturamento mensal: ${formData.revenue > 0 ? formatCurrency(formData.revenue) : 'Não informado'}
+- Regime Tributário: ${formData.taxRegime || 'Não informado'}
+- Especialidade: ${formData.specialty || 'Não informada'}
+- Economia mensal estimada: ${formatCurrency(economy.monthly)}
+- Economia anual estimada: ${formatCurrency(economy.annual)}
 - Recuperação retroativa (5 anos): ${formatCurrency(economy.recovery)}`;
 
     const encodedMessage = encodeURIComponent(message);
@@ -400,7 +397,7 @@ export default function App() {
                             className="space-y-6"
                           >
                             <div className="text-center space-y-2">
-                              <h3 className="text-2xl md:text-[26px] font-sans font-bold text-white px-4 leading-tight">Qual o seu regime tributário como médico hoje?</h3>
+                              <h3 className="text-2xl md:text-[26px] font-sans font-bold text-white px-4 leading-tight">Qual o seu regime tributário hoje?</h3>
                             </div>
                             
                             <div className="grid gap-3 pt-2">
@@ -421,7 +418,7 @@ export default function App() {
                           </motion.div>
                         )}
 
-                        {/* --- Step 3: Infrastructure --- */}
+                        {/* --- Step 3: Areas of Practice --- */}
                         {step === 3 && (
                           <motion.div
                             key="calc_s3"
@@ -431,14 +428,16 @@ export default function App() {
                             className="space-y-6"
                           >
                             <div className="text-center space-y-2">
-                              <h3 className="text-2xl md:text-[26px] font-sans font-bold text-white px-4 leading-tight">Você possui os seguintes componentes como médico?</h3>
+                              <h3 className="text-2xl md:text-[26px] font-sans font-bold text-white px-4 leading-tight">Você atua em quais áreas?</h3>
                             </div>
                             
                             <div className="grid gap-3 pt-2">
                               {[
-                                { id: 'proc', label: 'Sala de procedimentos cirúrgicos de média/baixa complexidade' },
-                                { id: 'equip', label: 'Monitor de sinais vitais ou aparelhos avançados de diagnóstico' },
-                                { id: 'staff', label: 'Equipe de apoio devidamente qualificada (Técnicos)' }
+                                { id: 'planton', label: 'Faço plantões em hospitais' },
+                                { id: 'cirurgia_hosp', label: 'Faço cirurgias em hospitais' },
+                                { id: 'cirurgia_clinica', label: 'Faço cirurgias em minha própria clínica' },
+                                { id: 'exame_diag', label: 'Faço exames de imagem e diagnóstico' },
+                                { id: 'proc_invasivo', label: 'Faço procedimentos invasivos' }
                               ].map((opt) => {
                                 const active = formData.infrastructure.includes(opt.id);
                                 return (
@@ -473,11 +472,20 @@ export default function App() {
                             className="space-y-6"
                           >
                             <div className="text-center space-y-2">
-                              <h3 className="text-2xl md:text-[26px] font-sans font-bold text-white px-4 leading-tight">Qual a sua especialidade médica central?</h3>
+                              <h3 className="text-2xl md:text-[26px] font-sans font-bold text-white px-4 leading-tight">Qual a sua especialidade central?</h3>
                             </div>
                             
                             <div className="grid grid-cols-2 gap-2 pt-2">
-                              {['Odontologia', 'Dermatologia', 'Estética', 'Ortopedia', 'Cardiologia', 'Exames/Diagnóstico', 'Oftalmologia', 'Outras'].map((opt) => (
+                              {[
+                                'Cirurgião Dentista',
+                                'Médico Cirurgião',
+                                'Dermatologia',
+                                'Ortopedia',
+                                'Cardiologia',
+                                'Exames/Diagnóstico',
+                                'Oftalmologia',
+                                'Outras'
+                              ].map((opt) => (
                                 <button
                                   key={opt}
                                   onClick={() => { 
@@ -493,36 +501,7 @@ export default function App() {
                           </motion.div>
                         )}
 
-                        {/* --- Step 5: Professionals --- */}
-                        {step === 5 && (
-                          <motion.div
-                            key="calc_s5"
-                            initial={{ opacity: 0, y: 15 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -15 }}
-                            className="space-y-6"
-                          >
-                            <div className="text-center space-y-2">
-                              <h3 className="text-2xl md:text-[26px] font-sans font-bold text-white px-4 leading-tight">Qual o número de médicos/profissionais na equipe?</h3>
-                            </div>
-                            
-                            <div className="grid gap-3 pt-2">
-                              {['1 a 3 profissionais', '4 a 10 profissionais', 'Mais de 10 especialistas'].map((opt) => (
-                                <button
-                                  key={opt}
-                                  onClick={() => { 
-                                    setFormData({ ...formData, professionals: opt }); 
-                                    nextStep(); 
-                                  }}
-                                  className={`p-5 text-left border transition-all flex justify-between items-center group font-sans ${formData.professionals === opt ? 'border-brand-gold bg-brand-gold/10 text-brand-gold' : 'border-white/5 bg-white/[0.01] hover:border-white/20 hover:bg-white/[0.03] text-white/70'}`}
-                                >
-                                  <span className="font-bold text-sm tracking-tight">{opt}</span>
-                                  <ChevronRight className="w-6 h-6 md:w-4 md:h-4 opacity-40 group-hover:opacity-100 transition-all" />
-                                </button>
-                              ))}
-                            </div>
-                          </motion.div>
-                        )}
+
 
                         {/* --- Step: Processing --- */}
                         {step === 'processing' && (
@@ -577,7 +556,7 @@ export default function App() {
                                   Viabilidade Econômica a Reavaliar
                                 </div>
                               )}
-                              <h3 className="text-2xl md:text-3xl font-sans font-extrabold text-white">Estimativa de Proteção Fiscal</h3>
+                              <h3 className="text-2xl md:text-3xl font-sans font-extrabold text-white">Estimativa de economia tributária</h3>
                             </div>
 
                             {isEligible ? (
@@ -610,6 +589,9 @@ export default function App() {
                                   </span>
                                   <span className="block text-[9px] text-white/40 uppercase tracking-widest mt-2 font-mono">
                                     Redução tributária média de até {reductionPercent.toFixed(1)}% nos federais
+                                  </span>
+                                  <span className="block text-[10px] text-white/45 mt-3 font-sans font-light italic">
+                                    *Cálculo meramente estimativo, necessária uma análise mais detalhada.
                                   </span>
                                 </div>
                               </div>
@@ -662,7 +644,7 @@ export default function App() {
                         </button>
                         
                         <div className="flex gap-2.5 py-2 order-2 md:order-2">
-                          {[1, 2, 3, 4, 5].map((idx) => (
+                          {[1, 2, 3, 4].map((idx) => (
                             <div 
                                 key={idx}
                                 className={`h-[4px] rounded-full transition-all duration-300 ${step === idx ? 'w-10 bg-brand-gold' : 'w-3 bg-white/10'}`}
@@ -672,9 +654,9 @@ export default function App() {
 
                         <button 
                           onClick={nextStep}
-                          disabled={step === 1 && !formData.revenue}
+                          disabled={(step === 1 && !formData.revenue) || (step === 4 && !formData.specialty)}
                           className={`w-full md:w-auto py-4.5 px-12 font-sans font-black text-xs md:text-sm tracking-widest uppercase flex items-center justify-center gap-2 rounded-md transition-all duration-300 cursor-pointer order-1 md:order-3 ${
-                            step === 1 && !formData.revenue 
+                            (step === 1 && !formData.revenue) || (step === 4 && !formData.specialty)
                               ? 'bg-white/5 border border-white/10 text-white/20 cursor-not-allowed shadow-none' 
                               : 'gold-gradient text-black font-extrabold hover:brightness-125 hover:scale-[1.05] active:scale-95 shadow-[0_0_30px_rgba(197,160,89,0.45)] hover:shadow-[0_0_45px_rgba(197,160,89,0.7)] ring-2 ring-white/15'
                           }`}
@@ -838,7 +820,7 @@ export default function App() {
             <span className="text-[8px] font-bold tracking-[0.2em] text-brand-gold/60 uppercase">Ou se preferir contato direto</span>
           </div>
           <a 
-            href="https://wa.me/5519996865610?text=Ol%C3%A1%20Dra.%20Fernanda%20Melo%20Sacilotto%2C%20estou%20no%20seu%20Portal%20do%20Simulador%20e%20gostaria%20de%20solicitar%20uma%20an%C3%A1lise%20estrat%C3%A9gica%20de%20Equipara%C3%A7%C3%A3o%20Hospitalar%20como%20m%C3%A9dico%20com%20CNPJ."
+            href="https://wa.me/5519996865610?text=Ol%C3%A1!%20Estou%20no%20seu%20portal%20do%20Simulador%20Tribut%C3%A1rio%20e%20gostaria%20de%20solicitar%20uma%20an%C3%A1lise%20estrat%C3%A9gica%20de%20Equipara%C3%A7%C3%A3o%20Hospitalar%20para%20minha%20empresa%20na%20%C3%A1rea%20da%20sa%C3%BAde."
             target="_blank"
             rel="noopener noreferrer"
             className="w-full py-4.5 px-6 rounded-md bg-[#009a60] text-white hover:bg-[#008250] hover:translate-y-[-2px] hover:scale-[1.01] active:scale-99 hover:shadow-2xl hover:shadow-[#009a60]/30 font-sans font-extrabold text-xs tracking-[0.2em] uppercase flex items-center justify-center gap-3 transition-all duration-300 shadow-lg shadow-[#009a60]/10 border border-emerald-500/20 ring-2 ring-emerald-500/10 hover:ring-emerald-400/30 cursor-pointer"
