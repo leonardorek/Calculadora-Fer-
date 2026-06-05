@@ -328,15 +328,7 @@ export default function App() {
               {/* --- Custom-Built Step-by-Step Interactive Calculator Container with premium obsidian gold theme and ambient glow shadow --- */}
               <div className="glass-card h-full rounded-lg border-2 border-brand-gold/60 bg-[#060607]/95 overflow-hidden flex flex-col p-6 md:p-10 relative shadow-[0_0_60px_rgba(194,163,116,0.25)] transition-all duration-300 md:min-h-[550px] lg:min-h-[610px] justify-between">
                 
-                {/* Visual watermark of Dra. Fernanda's brand - Elegant, extremely subtle, does not conflict with reading the calculator options */}
-                <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-[0.03] overflow-hidden select-none z-0">
-                  <img 
-                    src="https://melosacilottoadv.com.br/wp-content/uploads/2025/03/cropped-1.2-esquilo.png" 
-                    alt="Melo Sacilotto Advocacia Watermark" 
-                    className="w-[85%] max-w-[420px] object-contain select-none"
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
+
               
               <div className="relative z-10">
                 {/* Header Controls with Small Centered Logo */}
