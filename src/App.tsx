@@ -253,7 +253,19 @@ export default function App() {
         }
       }
     };
-    testConnection();
+    
+    // Defer non-critical connection test until the browser is idle to maximize FCP and paint performance
+    const deferTest = () => {
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(() => {
+          testConnection();
+        }, { timeout: 3000 });
+      } else {
+        setTimeout(testConnection, 2000);
+      }
+    };
+
+    deferTest();
   }, []);
 
   const { isEligible, monthly, annual, recovery, reductionPercent } = calculateEconomy();
