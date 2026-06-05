@@ -271,7 +271,7 @@ export default function App() {
           {/* Logo Brand Custom - Centered perfectly */}
           <div className="flex items-center justify-center cursor-pointer" onClick={() => { setStep(1); setRawInput(''); setFormData(INITIAL_DATA); }}>
             <img 
-              src="https://melosacilottoadv.com.br/wp-content/uploads/2025/03/3.2-madeira.png" 
+              src="https://melosacilottoadv.com.br/wp-content/uploads/2025/03/cropped-1.2-esquilo.png" 
               alt="Melo Sacilotto Advocacia" 
               className="h-10 md:h-12 w-auto object-contain hover:brightness-110 transition-all duration-300"
               referrerPolicy="no-referrer"
@@ -319,7 +319,7 @@ export default function App() {
                 {/* Visual watermark of Dra. Fernanda's brand - Elegant, extremely subtle, does not conflict with reading the calculator options */}
                 <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-[0.03] overflow-hidden select-none z-0">
                   <img 
-                    src="https://melosacilottoadv.com.br/wp-content/uploads/2025/03/3.2-madeira.png" 
+                    src="https://melosacilottoadv.com.br/wp-content/uploads/2025/03/cropped-1.2-esquilo.png" 
                     alt="Melo Sacilotto Advocacia Watermark" 
                     className="w-[85%] max-w-[420px] object-contain select-none"
                     referrerPolicy="no-referrer"
@@ -330,7 +330,7 @@ export default function App() {
                 {/* Header Controls with Small Centered Logo */}
                 <div className="flex flex-col items-center mb-5 pb-3.5 border-b border-white/[0.04] gap-2.5">
                   <img 
-                    src="https://melosacilottoadv.com.br/wp-content/uploads/2025/03/3.2-madeira.png" 
+                    src="https://melosacilottoadv.com.br/wp-content/uploads/2025/03/cropped-1.2-esquilo.png" 
                     alt="Melo Sacilotto Advocacia Logo" 
                     className="h-7 md:h-8 w-auto object-contain select-none"
                     referrerPolicy="no-referrer"
